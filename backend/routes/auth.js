@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const User = require('../modules/User') 
 
-router.get('/', (req, res)=>{
-     obj ={ 
-        name: 'hello',
-        Date: Date.now
-     }
-     res.json(obj)
+
+router.post('/', (req, res)=>{
+   const user = User(req.body)
+   user.save()
+   console.log(req.body)
+   res.send(req.body)
 })
 
 
