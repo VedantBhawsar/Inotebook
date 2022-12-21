@@ -3,10 +3,8 @@ const router = express.Router()
 const User = require('../modules/User') 
 const { body, validationResult } = require('express-validator');
 
-   
-
-
-router.post('/',[
+// This is Route (/api/createuser) for creating user
+router.post('/createuser',[
    body('name').isLength({ min: 3 }),
    body('email').isEmail(),
    body('password').isLength({ min: 1})
