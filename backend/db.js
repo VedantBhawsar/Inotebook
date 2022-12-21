@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // const MongoURL = 'mongodb+srv://admin:admin@vedant.rinkaiq.mongodb.net/?retryWrites=true&w=majority'
-const MongoURL = 'mongodb://localhost:27017/'
+const MongoURL = 'mongodb://localhost:27017/inotebook'
 //mongodb://localhost:27017/
 
 
