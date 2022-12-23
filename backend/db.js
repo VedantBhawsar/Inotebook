@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const MongoURL = 'mongodb://localhost:27017/inotebook'
 //mongodb://localhost:27017/
 
+mongoose.set('strictQuery', true)
 
-const connectToMongo = () =>{
+ const connectToMongo = () =>{
     mongoose.connect(MongoURL).then(() => {console.log('Connected')}).catch(() => console.log("WTF"));
 }
 
