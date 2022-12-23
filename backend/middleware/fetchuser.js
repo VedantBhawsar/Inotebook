@@ -7,14 +7,13 @@ const fetchuser = async (req, res, next) => {
     }
     try {
         const data = jwt.verify(token, JWT_TOKEN)
-        if (!data) {
-            res.status(400).send({ error: "Incorrect Auth Token" })
-        }
+        res.status(400).send({ error: "Incorrect Auth Token" })
         req.id = data.id
         next();
     } catch (error) {
         res.status(500).send({ error: "Internal Server Error" })
     }
 }
+
 
 module.exports = fetchuser
