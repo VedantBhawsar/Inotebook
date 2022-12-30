@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken")
 const JWT_TOKEN = "Babitaji"
+
+//Function for Fetching User Informaton 
 const fetchuser = async (req, res, next) => {
     const token = req.header('auth-token')
     if (!token) {
@@ -7,7 +9,6 @@ const fetchuser = async (req, res, next) => {
     }
     try {
         const data = jwt.verify(token, JWT_TOKEN)
-        res.status(400).send({ error: "Incorrect Auth Token" })
         req.id = data.id
         next();
     } catch (error) {

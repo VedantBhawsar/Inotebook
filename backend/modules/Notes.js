@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema } = require("mongoose")
 
 const NotesSchema = new Schema({
     tittle:{
@@ -20,4 +21,6 @@ const NotesSchema = new Schema({
     },
 })
 
-module.exports = mongoose.model('user', NotesSchema)
+const notes = mongoose.model('notes', NotesSchema)
+notes.createIndexes()
+module.exports = notes

@@ -1,10 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const Notes = require('../modules/Notes')
+const fetchuser = require('../middleware/fetchuser')
 
-router.get('/', (req, res)=>{
-     res.send('hello world')
+// Route 1: Fetching Notes from Mongodb
+router.get('/fetchnotes', fetchuser , async (req, res)=>{
+     const notes = await Notes.find({user: req.id})
+     res.json(notes)
 })
 
 
 
-module.exports = router
+module.exports =  router
