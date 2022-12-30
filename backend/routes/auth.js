@@ -88,7 +88,7 @@ router.post('/getuser', fetchuser, async (req, res) => {
       res.status(200).json({ user })
    } catch (error) {
       res.status(500).json({ error: "Internal Server Error" })
-      console.log(error)
+      console.log(error);
    }
  })
 
