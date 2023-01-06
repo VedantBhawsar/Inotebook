@@ -9,7 +9,7 @@ const FrontPage = () => {
             <form className='container my-4'>
                 <div className="mb-4 ">
                     <h4 for="exampleInputEmail1" className="form-label">Title</h4>
-                    <input type="text" lassName="form-control" placeholder='Title' id="exampleInputEmail1" aria-describedby="emailHelp" />
+                    <input type="text" className="form-control" placeholder='Title' id="exampleInputEmail1" aria-describedby="emailHelp" />
                 </div>
 
                 <div className="mb-4 ">
