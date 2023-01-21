@@ -1,34 +1,27 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { NoteContext } from '../context/noteContext'
 import Notes from './Notes'
+import { Link } from 'react-router-dom'
 
-
-const FrontPage = () => {
+const EditNote = () => {
     const context = useContext(NoteContext)
-    const { AddNote, GetNote } = context
+    const { EditNote } = context
     const [Note, setNote] = useState({ title: '', desc: '', tag: '' })
-
-    useEffect(() => {
-        GetNote()
-    }, [])
 
     const handledNote = (e) => {
         e.preventDefault()
-        if (Note.title && Note.desc && Note.tag) {
-            AddNote(Note.title, Note.desc, Note.tag)
-            alert('Note Updated')
-        } else {
-            alert('Enter All Field')
-        }
-        GetNote();
+        EditNote(Note._id, Note.title, Note.desc, Note.tag)
+        alert('Note Updated')
+        window.location.assign('http://localhost:3000')
     }
+
     const onChange = (e) => {
-        console.log('animal')
         setNote({ ...Note, [e.target.name]: e.target.value })
+        // setNote(..note)
     }
     return (
         <div style={{ marginTop: "11vh" }}>
-            <h1>Add Note</h1>
+            <h1>Update Note</h1>
             <form className='container my-4' >
                 <div className="mb-4 ">
                     <h4 htmlFor="title" className="form-label">Title</h4>
@@ -41,15 +34,13 @@ const FrontPage = () => {
                 </div>
 
                 <div className="mb-4 ">
-                    <h4 htmlFor="tag" className="form-label">Description</h4>
+                    <h4 htmlFor="tag" className="form-label">tag</h4>
                     <input type="text" className="form-control" placeholder='tag' id="tag" aria-describedby="tag" name='tag' onChange={onChange} />
                 </div>
-                <button type="submit" onClick={handledNote} className="btn btn-success">Add</button>
+                <button type="submit" onClick={handledNote} className="btn btn-success">Update</button>
             </form>
-            <h1>Your Note</h1>
-            <Notes />
         </div>
     )
 }
 
-export default FrontPage
+export default EditNote

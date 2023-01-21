@@ -3,13 +3,10 @@ import { Link, useLocation } from "react-router-dom"
 
 const Navbar = () => {
   const location = useLocation()
-  useEffect(() => {
-    console.log(location.pathname)
-  }, [location])
 
 
   return (
-    <nav className=" navbar navbar-expand-md navbar-dark bg-dark ">
+    <nav className=" navbar navbar-expand-md navbar-dark bg-dark position-fixed" style={{ width: "100%", zIndex: '1' }}>
       <div className="container-fluid">
         <Link to={'/'} className="head navbar-brand" >INoteBook</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -2,29 +2,29 @@ const mongoose = require('mongoose');
 const { Schema } = require("mongoose")
 
 const NotesSchema = new Schema({
-    user:{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        ref: 'user'
     },
-    title:{
+    title: {
         type: String,
         require: true
     },
-    
-    desc:{
+
+    desc: {
         type: String,
         require: true
     },
-    tag:{
+    tag: {
         type: String
     },
 
-    date:{
+    date: {
         type: Date,
         default: Date.now
     },
 })
 
-const notes = mongoose.model('notes', NotesSchema)
-notes.createIndexes()
-module.exports = notes
+const Notes = mongoose.model('notes', NotesSchema)
+Notes.createIndexes()
+module.exports = Notes

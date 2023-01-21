@@ -5,14 +5,14 @@ import NotesItems from './NotesItems'
 
 const Notes = () => {
     const context = useContext(NoteContext)
-    const { notes, setnotes } = context
+    const { notes, DeleteNote, EditNote } = context
     return (
         <div className='col ' style={{}}>
             <div className="container row" style={{ marginX: "0", gap: "2rem" }}>
                 {
                     notes.map((note) => {
                         return (
-                            <NotesItems notes={note} />
+                            <NotesItems DeleteNote={DeleteNote} EditNote={EditNote} notes={note} />
                         )
                     })
                 }

@@ -6,6 +6,7 @@ import About from "./Component/About"
 import { Route, BrowserRouter as Router, Link, Routes } from "react-router-dom"
 import NoteState from './context/noteContext';
 import Login from './Component/Login'
+import EditNote from './Component/EditNote';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <div className='container' style={{ overflow: 'hidden' }}>
             <Routes>
               <Route exact path="/" element={<FrontPage />} />
+              <Route exact path="/editnote" element={<EditNote />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login />} />
             </Routes>
