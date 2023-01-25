@@ -4,11 +4,11 @@ import Student from '../img/Student.gif'
 
 const Login = () => {
     const context = useContext(NoteContext)
-    const { Login } = context
+    const { Login, AuthToken } = context
     const [User, setUser] = useState({ email: '', password: '' })
     const handleLogin = (e) => {
         e.preventDefault()
-        Login(User.email , User.password)
+        Login(User.email, User.password)
 
     }
     const onChange = (e) => {
@@ -33,8 +33,7 @@ const Login = () => {
                             <input type="checkbox" name="" id="" />
                             <p>Save Details</p>
                         </div>
-                    </div>
-                    <button type="submit" className="btn btn-success" onClick={handleLogin}>Login</button>
+                    </div> <button type="submit" className="btn btn-success" onClick={handleLogin}>Login</button>
                 </form>
             </div>
         </div>

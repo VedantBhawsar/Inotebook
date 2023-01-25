@@ -41,7 +41,7 @@ const FrontPage = () => {
                 </div>
 
                 <div className="mb-4 ">
-                    <h4 htmlFor="tag" className="form-label">Description</h4>
+                    <h4 htmlFor="tag" className="form-label">Tag</h4>
                     <input type="text" className="form-control" placeholder='tag' id="tag" aria-describedby="tag" name='tag' onChange={onChange} />
                 </div>
                 <button type="submit" onClick={handledNote} className="btn btn-success">Add</button>

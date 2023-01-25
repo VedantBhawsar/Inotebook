@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from "react-router-dom"
+import { NoteContext } from '../context/noteContext'
 
 const Navbar = () => {
   const location = useLocation()
+  console.log(location)
+  const context = useContext(NoteContext)
+  const { AuthToken } = context
 
 
   return (
@@ -21,7 +25,12 @@ const Navbar = () => {
             </li>
           </ul>
           <form className="d-flex">
-            <Link to={'/login'} type="button" className="font-link btn btn-primary">Login</Link>
+            {
+              !AuthToken && <Link to={'/login'} type="button" className="font-link btn btn-primary">Login</Link>
+
+            }{
+              AuthToken && <h1>Your Login</h1>
+            }
           </form>
         </div>
       </div>

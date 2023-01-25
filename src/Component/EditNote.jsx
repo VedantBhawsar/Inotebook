@@ -1,18 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 import { NoteContext } from '../context/noteContext'
-import Notes from './Notes'
-import { Link } from 'react-router-dom'
 
-const EditNote = () => {
+const EditNote = (props) => {
     const context = useContext(NoteContext)
-    const { EditNote } = context
+    const { EditNote, NoteInfo } = context
     const [Note, setNote] = useState({ title: '', desc: '', tag: '' })
+
 
     const handledNote = (e) => {
         e.preventDefault()
-        EditNote(Note._id, Note.title, Note.desc, Note.tag)
+        EditNote(NoteInfo, Note.title, Note.desc, Note.tag)
         alert('Note Updated')
-        window.location.assign('http://localhost:3000')
+        // window.location.assign('http://localhost:3000')
+
     }
 
     const onChange = (e) => {
