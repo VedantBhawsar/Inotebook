@@ -9,6 +9,7 @@ import Login from './Component/Login'
 import EditNote from './Component/EditNote';
 import Proected from './Component/Proected';
 import Footer from './Component/Footer';
+import Register from './Component/Register';
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
               <Route exact path="/editnote" element={<EditNote />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/login" element={<Login />} />
+              <Route exact path='/register' element={<Register />} />
             </Routes>
           </div>
           <Footer />

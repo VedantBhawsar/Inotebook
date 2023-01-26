@@ -32,10 +32,12 @@ const Navbar = () => {
             </li>
           </ul>
           <div class="">
-            <form className="d-flex ">
+            <form className="d-flex" style={{ gap: "15px" }} >
               {
                 !AuthToken ? <Link to={'/login'} type="button" className="font-link btn btn-primary">Login</Link> :
-                  <img src={Avatar} width={'43px'} alt="avatar" srcset="" onClick={() => { dropdown === 'block' ? setdropdown('none') : setdropdown('block') }} />
+                  <img src={Avatar} className='Avatar' width={'43px'} alt="avatar" style={{
+                    borderRadius: "100%", cursor: "pointer"
+                  }} onClick={() => { dropdown === 'block' ? setdropdown('none') : setdropdown('block') }} />
               }
             </form>
             <div class="dropdown" style={{ display: `${dropdown}` }} aria-labelledby="dropdownMenuButton1">

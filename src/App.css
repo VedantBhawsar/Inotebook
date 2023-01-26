@@ -26,3 +26,7 @@
     border-radius: 5px;
     overflow: hidden;
 }
+
+.Avatar {
+    background-color: transparent;
+}

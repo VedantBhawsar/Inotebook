@@ -4,10 +4,18 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 export const NoteContext = createContext();
 
-const url = "http://localhost:4599/api"
+// const url = "http://localhost:4599/api"
+const url = 'https://inotebook-backend-ypin.onrender.com/api'
 
 const NoteState = (props) => {
     const notesInitial = [{
+        "_id": "63d21f8913278a48fb441810",
+        "user": "63cb9055c0fd2562a8edbc56",
+        "title": "Welcome",
+        "desc": "description",
+        "tag": "tag",
+        "date": Date.now(),
+        "__v": 0
     }]
     const [notes, setNotes] = useState(notesInitial)
     const [AuthToken, setAuthToken] = useState()
@@ -119,6 +127,28 @@ const NoteState = (props) => {
         }
     }
 
+    const Register = async (email, password, name) => {
+        const user = {
+            "email": email,
+            "name": name,
+            "password": password
+        }
+        try {
+
+            const response = await fetch(`${url}/auth/createuser`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            })
+            const userinfo = await (response.json())
+            setAuthToken(userinfo.authtoken)
+            localStorage.setItem('authtoken', userinfo.authtoken);
+        } catch (error) {
+            console.log(error)
+        }
+    }
     const Logout = () => {
         setAuthToken()
         localStorage.clear()
@@ -129,7 +159,7 @@ const NoteState = (props) => {
     }
 
     return (
-        <NoteContext.Provider value={{ notes, Logout, Login, noteinfo, setNoteInfo, NoteInfo, AuthToken, GetNote, AddNote, DeleteNote, EditNote }}>
+        <NoteContext.Provider value={{ notes, Register, Logout, Login, noteinfo, setNoteInfo, NoteInfo, AuthToken, GetNote, AddNote, DeleteNote, EditNote }}>
             {props.children}
         </NoteContext.Provider>
     )
