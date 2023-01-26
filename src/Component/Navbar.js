@@ -1,12 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLocation } from "react-router-dom"
 import { NoteContext } from '../context/noteContext'
+import Avatar from '../img/Avatar.png'
+import '../App.css'
 
 const Navbar = () => {
   const location = useLocation()
-  console.log(location)
   const context = useContext(NoteContext)
-  const { AuthToken } = context
+  const { AuthToken, Logout } = context
+  const [dropdown, setdropdown] = useState('none')
 
 
   return (
@@ -18,20 +20,34 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to={'/'} className={`nav-link ${location.pathname === '/' ? "active" : ""}`} aria-current="page" >Home</Link>
+              {
+                AuthToken && <Link to={'/'} className={`nav-link ${location.pathname === '/' ? "active" : ""}`} aria-current="page" >Home</Link>
+
+              }
             </li>
             <li className="nav-item">
-              <Link to={"/about"} className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} >About</Link>
+              {
+                AuthToken && <Link to={"/about"} className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} >About</Link>
+              }
             </li>
           </ul>
-          <form className="d-flex">
-            {
-              !AuthToken && <Link to={'/login'} type="button" className="font-link btn btn-primary">Login</Link>
-
-            }{
-              AuthToken && <h1>Your Login</h1>
-            }
-          </form>
+          <div class="">
+            <form className="d-flex ">
+              {
+                !AuthToken ? <Link to={'/login'} type="button" className="font-link btn btn-primary">Login</Link> :
+                  <img src={Avatar} width={'43px'} alt="avatar" srcset="" onClick={() => { dropdown === 'block' ? setdropdown('none') : setdropdown('block') }} />
+              }
+            </form>
+            <div class="dropdown" style={{ display: `${dropdown}` }} aria-labelledby="dropdownMenuButton1">
+              <button
+                onClick={
+                  () => {
+                    setdropdown('none')
+                    Logout()
+                  }
+                } class="dropdown-item">Log out</button>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

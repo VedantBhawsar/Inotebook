@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const NoteContext = createContext();
 
@@ -13,13 +13,19 @@ const NoteState = (props) => {
     const [AuthToken, setAuthToken] = useState()
     const [NoteInfo, setNoteInfo] = useState('')
 
+    useEffect(() => {
+        const data = localStorage.getItem('authtoken')
+        setAuthToken(data)
+    }, [])
+
+
     const GetNote = async () => {
         try {
             const response = await fetch(`${url}/notes/fetchallnotes`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': AuthToken.authtoken
+                    'auth-token': AuthToken
                 },
                 referrerPolicy: 'no-referrer',
             })
@@ -43,7 +49,7 @@ const NoteState = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': AuthToken.authtoken
+                    'auth-token': AuthToken
                 },
                 body: JSON.stringify(note),
             })
@@ -60,7 +66,7 @@ const NoteState = (props) => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': AuthToken.authtoken
+                    'auth-token': AuthToken
                 }
             })
         } catch (error) {
@@ -77,12 +83,11 @@ const NoteState = (props) => {
             "tag": tag
         };
         try {
-
             const response = await fetch(`${url}/notes/updatenote/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': AuthToken.authtoken
+                    'auth-token': AuthToken
                 },
                 body: JSON.stringify(note),
             })
@@ -107,12 +112,16 @@ const NoteState = (props) => {
                 body: JSON.stringify(user)
             })
             const userinfo = await (response.json())
-            setAuthToken(userinfo)
+            setAuthToken(userinfo.authtoken)
+            localStorage.setItem('authtoken', userinfo.authtoken);
         } catch (error) {
             console.log(error)
         }
+    }
 
-
+    const Logout = () => {
+        setAuthToken()
+        localStorage.clear()
     }
 
     const noteinfo = (id) => {
@@ -120,7 +129,7 @@ const NoteState = (props) => {
     }
 
     return (
-        <NoteContext.Provider value={{ notes, Login, noteinfo, setNoteInfo, NoteInfo, AuthToken, GetNote, AddNote, DeleteNote, EditNote }}>
+        <NoteContext.Provider value={{ notes, Logout, Login, noteinfo, setNoteInfo, NoteInfo, AuthToken, GetNote, AddNote, DeleteNote, EditNote }}>
             {props.children}
         </NoteContext.Provider>
     )

@@ -8,7 +8,7 @@ const Notes = () => {
     const { notes, DeleteNote, EditNote } = context
     return (
         <div className='col ' style={{}}>
-            <div className="container row" style={{ marginX: "0", gap: "2rem" }}>
+            <div className="container row" style={{ marginX: "0", gap: "2rem", marginBottom: '20px' }}>
                 {
                     notes.map((note) => {
                         return (
